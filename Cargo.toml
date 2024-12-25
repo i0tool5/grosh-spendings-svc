@@ -1,0 +1,17 @@
+[package]
+name = "spendings-svc"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.94"
+axum = "0.8.1"
+sea-orm = { version = "1.1.2", features = ["sqlx-postgres", "runtime-tokio", "macros", "with-uuid", "with-time", "with-json"] }
+serde = { version="1.0.216", features = ["derive"] }
+serde_json = "1.0.133"
+time = { version = "0.3.37", features = ["std", "serde-human-readable"] }
+tokio = { version = "1.42.0", features = ["full"] }
+uuid = { version = "1.11.0", features = ["serde", "v4"] }
+migration = { path = "migration" }
+tracing = "0.1.41"
+tracing-subscriber = "0.3.19"
