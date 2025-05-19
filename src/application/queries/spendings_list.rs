@@ -1,6 +1,7 @@
 use std::sync::Arc;
 
 use axum::http;
+use migration::SimpleExpr;
 use serde::{
     Deserialize,
     Serialize,
@@ -54,9 +55,14 @@ impl SpendingsListQueryHandler {
         let limit = args.limit.unwrap_or(25);
         let offset = args.offset.unwrap_or_default();
 
-        let count = entities::prelude::Spendings::find().count(self.db.as_ref()).await?;
+        let user_id_filter = entities::spendings::Column::UserId.eq(args.user_id);
+        let count = entities::prelude::Spendings::find()
+            .filter(SimpleExpr::clone(&user_id_filter))
+            .count(self.db.as_ref())
+            .await?;
+
         let stored_spendings  = entities::prelude::Spendings::find()
-            .filter(entities::spendings::Column::UserId.eq(args.user_id))
+            .filter(SimpleExpr::clone(&user_id_filter))
             .limit(limit)
             .offset(offset)
             .order_by(entities::spendings::Column::SpendingDate, Order::Desc)
