@@ -41,8 +41,6 @@ pub struct SpendingsListQueryHandler {
     db: Arc<sea_orm::DatabaseConnection>,
 }
 
-// type SpendingsModel = entities::spendings::Model;
-
 impl SpendingsListQueryHandler {
     pub fn new(db: Arc<sea_orm::DatabaseConnection>) -> SpendingsListQueryHandler {
         SpendingsListQueryHandler{db}
