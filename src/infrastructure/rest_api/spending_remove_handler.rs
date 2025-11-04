@@ -24,7 +24,6 @@ pub async fn spending_remove_handler(
     if cmd.validate().is_err() {
         return Err(AppError::new(http::StatusCode::BAD_REQUEST, ""));
     }
-    tracing::info!("remove spending command: {:?}", cmd);
 
     let result = state.spending_remove_command_handler.handle(cmd).await;
     

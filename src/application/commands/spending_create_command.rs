@@ -34,7 +34,7 @@ impl SpendingCreateCommand {
         }
     }
     pub fn validate(self: &Self) -> Result<(), application::errors::AppError> {
-        if self.amount < 0 {
+        if self.amount <= 0 {
             return Err(application::errors::AppError::new(
                 http::StatusCode::BAD_REQUEST,
                  "invalid amount"

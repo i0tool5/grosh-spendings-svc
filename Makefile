@@ -9,4 +9,4 @@ run:
 
 migrate:
 	@echo 'CREATE SCHEMA IF NOT EXISTS spendings' | psql $(DB_URL)
-	GROSH_DB_URL=$(DB_URL) GROSH_SPENDINGS_SCHEMA=$(DB_SCHEMA) GROSH_SPENDINGS_BIND_ADDRESS=$(BIND_ADDRESS) cargo run -- -migrate up
+	DATABASE_URL=$(DB_URL) DATABASE_SCHEMA=$(DB_SCHEMA) cargo run migration/.

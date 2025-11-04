@@ -43,7 +43,7 @@ impl SpendingRemoveCommandHandler {
     }
 
     pub async fn handle(&self, cmd: SpendingRemoveCommand) -> anyhow::Result<(), application::errors::AppError> {
-        tracing::info!("remove spending command {:?}", &cmd.spending_id);
+        tracing::info!("remove spending command: {:?}", cmd);
 
         self.repository.remove(
             cmd.spending_id,
