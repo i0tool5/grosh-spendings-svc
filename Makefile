@@ -7,6 +7,11 @@ BIND_ADDRESS = "0.0.0.0:58888"
 run:
 	GROSH_DB_URL=$(DB_URL) GROSH_SPENDINGS_SCHEMA=$(DB_SCHEMA) GROSH_SPENDINGS_BIND_ADDRESS=$(BIND_ADDRESS) cargo run
 
-migrate:
+migrate-up:
 	@echo 'CREATE SCHEMA IF NOT EXISTS spendings' | psql $(DB_URL)
-	DATABASE_URL=$(DB_URL) DATABASE_SCHEMA=$(DB_SCHEMA) cargo run migration/.
+	cd ./migration && \
+	DATABASE_URL=$(DB_URL) DATABASE_SCHEMA=$(DB_SCHEMA) cargo run up
+
+migrate-down:
+	cd ./migration && \
+	DATABASE_URL=$(DB_URL) DATABASE_SCHEMA=$(DB_SCHEMA) cargo run down

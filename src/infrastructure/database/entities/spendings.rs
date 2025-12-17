@@ -10,8 +10,8 @@ pub struct Model {
     pub user_id: uuid::Uuid,
     #[sea_orm(column_name = "date")]
     pub spending_date: Option<time::Date>,
-    #[sea_orm(column_type = "Text", column_name = "type")]
-    pub spending_type: String,
+    #[sea_orm(column_name = "types")]
+    pub spending_types: Vec<String>,
     #[sea_orm(column_type = "Text", nullable)]
     pub description: Option<String>,
     pub amount: Decimal,

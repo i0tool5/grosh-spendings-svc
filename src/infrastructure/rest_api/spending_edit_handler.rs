@@ -18,7 +18,7 @@ use super::parse_user_id;
 #[derive(Deserialize, Serialize, Debug)]
 pub struct SpendingEditRequest {
     #[serde(rename = "type")]
-    pub spending_type : String,
+    pub spending_types: Vec<String>,
     #[serde(rename = "date")]
     pub spending_date: time::Date,
     pub description: Option<String>,
@@ -35,7 +35,7 @@ pub async fn spending_edit_handler(
     let cmd = application::commands::SpendingEditCommand::new(
         spending_id,
         user_id,
-        payload.spending_type,
+        payload.spending_types,
         payload.spending_date,
         payload.description,
         payload.amount

@@ -13,7 +13,7 @@ impl MigrationTrait for Migration {
                     "id" UUID PRIMARY KEY,
                     "user_id" UUID NOT NULL,
                     "date" DATE,
-                    "type" TEXT NOT NULL,
+                    "types" TEXT[] NOT NULL,
                     "description" TEXT,
                     "amount" NUMERIC NOT NULL
                 );"#

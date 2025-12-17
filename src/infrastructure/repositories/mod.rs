@@ -23,7 +23,7 @@ pub mod spendings {
             self: &Self,
             user_id: uuid::Uuid,
             spending_date: Option<time::Date>,
-            spending_type: String,
+            spending_types: Vec<String>,
             description: Option<String>,
             amount: i64,
         ) -> anyhow::Result<()> {
@@ -32,7 +32,7 @@ pub mod spendings {
                 id: sea_orm::ActiveValue::Set(id),
                 user_id: sea_orm::ActiveValue::Set(user_id),
                 spending_date: sea_orm::ActiveValue::Set(spending_date),
-                spending_type: sea_orm::ActiveValue::Set(spending_type),
+                spending_types: sea_orm::ActiveValue::Set(spending_types),
                 description: sea_orm::ActiveValue::Set(description),
                 amount: sea_orm::ActiveValue::Set(seaDecimal::new(amount, 0)),
             };
@@ -53,7 +53,7 @@ pub mod spendings {
                 id: sea_orm::ActiveValue::Set(spending.id),
                 user_id: sea_orm::ActiveValue::Unchanged(spending.user_id),
                 spending_date: sea_orm::ActiveValue::Set(spending.spending_date),
-                spending_type: sea_orm::ActiveValue::Set(spending.spending_type),
+                spending_types: sea_orm::ActiveValue::Set(spending.spending_types),
                 description: sea_orm::ActiveValue::Set(spending.description),
                 amount: sea_orm::ActiveValue::Set(seaDecimal::new(spending.amount, 0)),
             };

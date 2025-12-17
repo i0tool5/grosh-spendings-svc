@@ -11,7 +11,7 @@ use crate::{application, infrastructure::repositories::spendings::Repository};
 #[derive(Debug)]
 pub struct SpendingCreateCommand {
     pub user_id: uuid::Uuid,
-    pub spending_type : String,
+    pub spending_types : Vec<String>,
     pub spending_date: Option<time::Date>,
     pub description: Option<String>,
     pub amount: i64,
@@ -20,14 +20,14 @@ pub struct SpendingCreateCommand {
 impl SpendingCreateCommand {
     pub fn new(
         user_id: uuid::Uuid,
-        spending_type: String,
+        spending_types: Vec<String>,
         spending_date: Option<time::Date>,
         description: Option<String>,
         amount: i64,
     ) -> SpendingCreateCommand{
         SpendingCreateCommand{
             user_id,
-            spending_type,
+            spending_types,
             spending_date,
             description,
             amount,
@@ -66,7 +66,7 @@ impl CreateSpendingCommandHandler {
         let result = self.repository.create(
             cmd.user_id,
             spending_date,
-            cmd.spending_type,
+            cmd.spending_types,
             cmd.description,
             cmd.amount,
         ).await;

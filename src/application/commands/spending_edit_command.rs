@@ -9,7 +9,7 @@ use crate::{application, domain, infrastructure::repositories::spendings::Reposi
 pub struct SpendingEditCommand {
     pub id: uuid::Uuid,
     pub user_id: uuid::Uuid,
-    pub spending_type: String,
+    pub spending_types: Vec<String>,
     pub spending_date: time::Date,
     pub description: Option<String>,
     pub amount: i64,
@@ -19,7 +19,7 @@ impl SpendingEditCommand {
     pub fn new(
         id: uuid::Uuid,
         user_id: uuid::Uuid,
-        spending_type: String,
+        spending_types: Vec<String>,
         spending_date: time::Date,
         description: Option<String>,
         amount: i64,
@@ -27,7 +27,7 @@ impl SpendingEditCommand {
         SpendingEditCommand{
             id,
             user_id,
-            spending_type,
+            spending_types,
             spending_date,
             description,
             amount,
@@ -74,7 +74,7 @@ impl SpendingEditCommandHandler {
                 id: cmd.id,
                 user_id: cmd.user_id,
                 spending_date: Some(cmd.spending_date),
-                spending_type: cmd.spending_type,
+                spending_types: cmd.spending_types,
                 description: cmd.description,
                 amount: cmd.amount,
             },

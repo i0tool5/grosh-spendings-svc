@@ -17,8 +17,8 @@ use super::parse_user_id;
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct CreateSpendingRequest {
-    #[serde(rename = "type")]
-    pub spending_type : String,
+    #[serde(rename = "types")]
+    pub spending_types: Vec<String>,
     #[serde(rename = "date")]
     pub spending_date: Option<time::Date>,
     pub description: Option<String>,
@@ -33,7 +33,7 @@ pub async fn spending_create_handler(
     let user_id = parse_user_id(headers)?;
     let cmd = application::commands::SpendingCreateCommand::new(
         user_id,
-        payload.spending_type,
+        payload.spending_types,
         payload.spending_date,
         payload.description,
         payload.amount

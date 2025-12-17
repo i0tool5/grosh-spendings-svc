@@ -24,7 +24,7 @@ pub struct SpendingsListQueryArgs {
 pub struct SpendingResponse {
     pub id: uuid::Uuid,
     #[serde(rename = "type")]
-    pub spending_type : String,
+    pub spending_types: Vec<String>,
     #[serde(rename = "date")]
     pub spending_date: Option<time::Date>,
     pub description: Option<String>,
@@ -75,7 +75,7 @@ impl SpendingsListQueryHandler {
         for sp in stored_spendings {
             spendings_response.push(SpendingResponse {
                 id: sp.id,
-                spending_type: sp.spending_type,
+                spending_types: sp.spending_types,
                 spending_date: sp.spending_date,
                 description: sp.description,
                 amount: sp.amount.try_into().unwrap(),
