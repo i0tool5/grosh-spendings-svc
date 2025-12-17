@@ -33,16 +33,3 @@ pub async fn spendings_list_handler(
     return Ok(spendings_result);
     
 }
-
-#[cfg(test)]
-mod tests {
-    use std::time as stime;
-    use time;
-
-    #[test]
-    fn it_works() {
-        let s = stime::SystemTime::now().duration_since(stime::SystemTime::UNIX_EPOCH);
-        let a = s.unwrap();
-        println!("{:?}", time::Date::from_ordinal_date(1970, 1).unwrap() + a);
-    }
-}
