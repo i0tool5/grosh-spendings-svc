@@ -4,7 +4,7 @@ use axum::{extract, http};
 
 use serde::Deserialize;
 
-use crate::application::{self, queries, State};
+use crate::application::{self, State, queries};
 
 use super::parse_user_id;
 
